@@ -9,8 +9,29 @@
  *
  */
 
- // Define an object to check for duplicates
+ // Change the way you want your visualisation to look
+
+// This is what a positive tweet will look like
+var positiveColour = "rgb(254, 248, 0)";
+var positiveStrength = 0.8;
+var positiveSize = 20;
+
+// This is what a neutral tweet will look like
+var neutralColour = "rgb(255, 255, 255)";
+var neutralStrength = 0.8;
+var neutralSize = 20;
+
+// This is  what a negative tweet will look like
+var negativeColour = "rgb(0, 0, 0)";
+var negativeStrength = 0.8;
+var negativeSize = 20;
+
+
+// Probably no need to edit past this point
+
+// Define an object to check for duplicates
 var duplicate = [];
+
 
 function getTweets(latitude, longitude, radius, sentiment) {
   // Make a request to our live twitter JSON stream
@@ -56,11 +77,9 @@ function getTweets(latitude, longitude, radius, sentiment) {
 function addMarker(lat, lng, tweet, sentiment) {
 
   // Check to see if we want to do any sentiment analysis
-    if (sentiment == "sentiment") {
+    if (sentiment != undefined) {
       // Use our API to get a number
-       $.ajax({
-        url: "https://rsvp.decoded.co/sentiment/?txt="+encodeURIComponent(tweet),
-        success: function (data) {
+      $.ajax({url: "http://sentiment.decoded.com/api/"+sentiment+"/?txt="+encodeURIComponent(tweet), jsonp: "callback", dataType: "jsonp", success: function (data) {
           keepGoing(tweet, data.result.sentiment);
         }
       });
@@ -81,9 +100,9 @@ function addMarker(lat, lng, tweet, sentiment) {
         if (sentiment == 'Positive') {
           var theIcon = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          fillOpacity: 0.5,
-          fillColor: "rgba(254, 248, 0, 0.7)",
+          scale: positiveSize,
+          fillOpacity: positiveStrength,
+          fillColor: positiveColour,
           strokeWeight: 0
           }
         }
@@ -92,9 +111,9 @@ function addMarker(lat, lng, tweet, sentiment) {
         else if (sentiment == 'Neutral') {
           var theIcon = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          fillOpacity: 0.5,
-          fillColor: "white",
+          scale: neutralSize,
+          fillOpacity: neutralStrength,
+          fillColor: neutralColour,
           strokeWeight: 0
           }
         }
@@ -103,32 +122,32 @@ function addMarker(lat, lng, tweet, sentiment) {
         else if (sentiment == 'Negative') {
           var theIcon = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          fillOpacity: 0.5,
-          fillColor: "black",
+          scale: negativeSize,
+          fillOpacity: negativeStrength,
+          fillColor: negativeColour,
           strokeWeight: 0
           }
         }
-      }
-      // If we're not doing sentiment analysis, create this sort of marker
-      else {
-        var theIcon = {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 8,
-        fillOpacity: 0.8,
-        fillColor: "rgba(254, 248, 0, 0.7)",
-        strokeWeight: 0
-        }
-      }
-
-      // Create a variable with the correct information
+        // If we are doing sentiment analysis, create this sort of marker
       var marker = new google.maps.Marker({
         // Set the position of the marker
         position: new google.maps.LatLng(lat, lng),
         // Put the marker on a Google map
         map: map,
-        icon: theIcon,
+        icon: theIcon
       });
+      }
+      // If we're not doing sentiment analysis, create this sort of marker
+      else {
+      var marker = new google.maps.Marker({
+        // Set the position of the marker
+        position: new google.maps.LatLng(lat, lng),
+        // Put the marker on a Google map
+        map: map
+      });
+      }
+
+
       // Create an info window with the contents of this tweet
       var infowindow = new google.maps.InfoWindow({
         content: tweet
