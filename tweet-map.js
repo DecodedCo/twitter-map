@@ -33,7 +33,7 @@ var negativeSize = 20;
 var duplicate = [];
 
 
-function getTweets(latitude, longitude, radius, sentiment) {
+function getTweets(latitude, longitude, radius, update, sentiment) {
   // Make a request to our live twitter JSON stream
   $.ajax({url: "http://twitter.decoded.com/tweets.php?callback=decoded", jsonp: "callback", dataType: "jsonp", success: function (data) {
 
@@ -71,6 +71,11 @@ function getTweets(latitude, longitude, radius, sentiment) {
 
         });
   }});
+
+  // If update, set this function to run again
+  if (update != undefined) {
+    setTimeout(function() { getTweets(latitude, longitude, radius, "yes", sentiment) }, 2000);
+  }
 }
 
 
@@ -185,4 +190,3 @@ function deg2rad(deg) {
   script.src = '//code.jquery.com/jquery-1.11.0.min.js';
   script.type = 'text/javascript';
   document.getElementsByTagName('head')[0].appendChild(script);
-

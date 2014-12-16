@@ -16,7 +16,7 @@ addMarker(48.8580119,2.34294, "Hello")
 
 ## getTweets
 
-The getTweets function will get all live tweets from an area. To use this function, supply a latitude, longitude and radius. If you want sentiment analysis to be performed on the text then add a sentiment value - imdb for analysis using machine learning, and dictionary for analysis using dictionary words. See the difference at sentiment.decoded.com
+The getTweets function will get all live tweets from an area. To use this function, supply a latitude, longitude, radius and say whether you want the map to update in real time. If you want sentiment analysis to be performed on the text then add a sentiment value - imdb for analysis using machine learning, and dictionary for analysis using dictionary words. See the difference at sentiment.decoded.com
 
 Please make sure you set up your stream at twitter.decoded.com/setup before you use the below functions!
 
@@ -24,6 +24,6 @@ It should look something like this:
 
 getTweets(latitude, longitude, radius, sentiment)
 
-getTweets(48.8580119,2.34294, 500, "imdb")
+getTweets(48.8580119,2.34294, 500, "update", "imdb")
 
-getTweets(48.8580119,2.34294, 500, "dictionary")
+getTweets(48.8580119,2.34294, 500, "update", "dictionary")
