@@ -13,18 +13,18 @@
 
 // This is what a positive tweet will look like
 var positiveColour = "rgb(254, 248, 0)";
-var positiveStrength = 0.8;
-var positiveSize = 20;
+var positiveStrength = 0.9;
+var positiveSize = 14;
 
 // This is what a neutral tweet will look like
 var neutralColour = "rgb(255, 255, 255)";
-var neutralStrength = 0.8;
-var neutralSize = 20;
+var neutralStrength = 0.6;
+var neutralSize = 10;
 
 // This is  what a negative tweet will look like
-var negativeColour = "rgb(0, 0, 0)";
-var negativeStrength = 0.8;
-var negativeSize = 20;
+var negativeColour = "rgb(227,27,27)";
+var negativeStrength = 0.6;
+var negativeSize = 10;
 
 
 // Probably no need to edit past this point
@@ -35,8 +35,11 @@ var duplicate = [];
 
 function getTweets(latitude, longitude, radius, update, sentiment) {
   // Make a request to our live twitter JSON stream
-  $.ajax({url: "http://twitter.decoded.com/tweets.php?callback=decoded", jsonp: "callback", dataType: "jsonp", success: function (data) {
-
+  console.log('requesting');
+  $.ajax({url: "http://twitter.decoded.com/tweets.json", dataType: "json", success: function (data) {
+    
+    console.log('Request successful: ', data.length);
+    
     // For each of the tweets, split out their individual information
 
       $.each(data, function( i, item ) {
@@ -184,9 +187,3 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
-
-// Pull in jQuery
-  var script = document.createElement('script');
-  script.src = '//code.jquery.com/jquery-1.11.0.min.js';
-  script.type = 'text/javascript';
-  document.getElementsByTagName('head')[0].appendChild(script);
