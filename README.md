@@ -36,4 +36,6 @@ getTweets(latitude, longitude, radius, sentiment)
 getTweets(48.8580119,2.34294, 500, "update", "imdb")
 
 getTweets(48.8580119,2.34294, 500, "update", "dictionary")
+
+getTweets(48.8580119,2.34294, 500, undefined, "dictionary")
 ~~~
