@@ -10,9 +10,9 @@ This library will allow you to add tweets onto a Google Map, and to perform live
 
 The addMarker adds a marker to a Google Map on your page. To use this function, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add a sentiment value. It should look something like this:
 
-addMarker(latitude,longitude,text,sentiment)
+controller.addMarker(latitude,longitude,text,sentiment)
 
-addMarker(48.8580119,2.34294, "Hello")
+controller.addMarker(48.8580119,2.34294, "Hello")
 
 ## getTweets
 
