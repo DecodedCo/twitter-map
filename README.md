@@ -12,11 +12,17 @@ You can configure a number of settings for your client.
 To set default parameters for your map on load:
 
 ```
+var controller = {};
+
 var mapConfigs = {
    latitude: 51.5044477,
    longitude: -0.130291,
    radius: 5000,
    sentiment: 'sentiment'
+};
+
+function pageControlsInit () {
+  // This is where the functions go.
 };
 ```
 
@@ -45,7 +51,7 @@ var markerConfigs = {
 
 ## addMarker
 
-The addMarker adds a marker to a Google Map on your page. To use this function, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add a sentiment value. It should look something like this:
+The addMarker adds a marker to a Google Map on your page. These functions need to be added within the `pageControlsInit()`. To use this function, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add a sentiment value. It should look something like this:
 
 ```
 controller.addMarker(latitude,longitude,text,sentiment)
