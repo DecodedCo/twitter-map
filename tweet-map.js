@@ -13,7 +13,7 @@ function async_load (source, done){
   $.getScript(source, done);
 }
 
-var controller = controller || null;
+var controller = window.controller || null;
 
 document.addEventListener('DOMContentLoaded', function () {
   var sources = [
@@ -22,15 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
     'https://labs.decoded.com/data/twitter/js/TweetMapController.js'
   ];
   var postLoad = function () {
-    var mapConfigs = mapConfigs || {};
+    var mapConfigs = window.mapConfigs || {};
     mapConfigs.mainMarker = false;
     mapConfigs.url = 'wss://labs.decoded.com/data/twitter/stream/';
-    mapConfigs.map = map;
-    $('body').bind('controllerLoaded', pageControlsInit);
+    mapConfigs.map = window.map;
+    $('body').bind('controllerLoaded', window.pageControlsInit);
     controller = new TweetMapController(mapConfigs);
     $('body').trigger('controllerLoaded');
-    if (typeof markerConfigs === 'object') {
-      controller.setMarkerProperties(markerConfigs);
+    if (typeof window.markerConfigs === 'object') {
+      controller.setMarkerProperties(window.markerConfigs);
     }
   };
 
