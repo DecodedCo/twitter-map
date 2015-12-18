@@ -1,29 +1,83 @@
 Twitter Map Library
 ===========
 
-A library for creating a map of tweets, live, from the Twitter API.
+A library for creating a map of live tweets from the Twitter API.
 
-This library will allow you to add tweets onto a Google Map, and to perform live sentiment analysis on each tweet that comes in. There are two functions that come with the library:
+This library will allow you to add tweets onto a Google Map, and to perform live sentiment analysis on each tweet that comes in. There are two functions that come with the library, `addMarker()` and `startStream()`:
+
+## Configure Your Stream
+
+You can configure a number of settings for the tweets you display.
+
+To set default parameters for your map when the map loads:
+
+```
+var controller = {};
+
+var mapConfigs = {
+   latitude: 51.5044477,
+   longitude: -0.130291,
+   radius: 5000,
+   sentiment: 'imdb' // can be 'dictionary' or 'imdb'
+};
+
+function pageControlsInit () {
+  // This is where the addMarker() and/or startStream() functions go.
+};
+```
+
+To configure sentiment marker settings:
+
+```
+var markerConfigs = {
+  positive: {
+    color: 'rgb(43, 24, 92)',
+    strength: 0.5,
+    size: 50
+  },
+  neutral: {
+    color: 'rgb(255, 255, 255)',
+    strength: 0.8,
+    size: 20
+  },
+  negative: {
+    color: 'rgb(0, 0, 0)',
+    strength: 0.8,
+    size: 20
+  }
+};
+```
 
 
 ## addMarker
 
-The addMarker adds a marker to a Google Map on your page. To use this function, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add a sentiment value. It should look something like this:
+The `addMarker()` function adds a single marker to a Google Map on your page. This function needs to be added within the `pageControlsInit()` function. To use `addMarker()`, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add either 'dictionary' or 'imdb'. It should look something like this:
 
-addMarker(latitude,longitude,text,sentiment)
+```
+controller.addMarker(latitude,longitude,text,sentiment);
 
-addMarker(48.8580119,2.34294, "Hello")
+controller.addMarker(48.8580119,2.34294,'Hello'); // without sentiment analysis
 
-## getTweets
+controller.addMarker(48.8580119,2.34294,'Hello','dictionary'); // with sentiment analysis
+```
 
-The getTweets function will get all live tweets from an area. To use this function, supply a latitude, longitude, radius and say whether you want the map to update in real time. If you want sentiment analysis to be performed on the text then add a sentiment value - imdb for analysis using machine learning, and dictionary for analysis using dictionary words. See the difference at sentiment.decoded.com
+## startStream
 
-Please make sure you set up your stream at twitter.decoded.com/setup before you use the below functions!
+Starting the stream will open a twitter stream to your browser and will display many tweets on your map using the parameters you provide. This function needs to be added within the `pageControlsInit()` function. If you don't pass any arguments, the stream will use the default settings you have already set up for your map. Otherwise, you can pass a new latitude and longitude, radius and sentiment.
 
-It should look something like this:
+To start the stream using defaults:
 
-getTweets(latitude, longitude, radius, sentiment)
+```
+controller.startStream();
+```
 
-getTweets(48.8580119,2.34294, 500, "update", "imdb")
+To start the stream using new settings:
 
-getTweets(48.8580119,2.34294, 500, "update", "dictionary")
+```
+startStream({
+  latitude: 48.8580119,
+  longitude: 2.34294,
+  radius: 500, // in km
+  sentiment: 'imdb' // can be 'dictionary' or 'imdb'
+});
+```
