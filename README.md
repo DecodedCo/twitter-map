@@ -1,15 +1,15 @@
 Twitter Map Library
 ===========
 
-A library for creating a map of tweets, live, from the Twitter API.
+A library for creating a map of live tweets from the Twitter API.
 
-This library will allow you to add tweets onto a Google Map, and to perform live sentiment analysis on each tweet that comes in. There are two functions that come with the library:
+This library will allow you to add tweets onto a Google Map, and to perform live sentiment analysis on each tweet that comes in. There are two functions that come with the library, `addMarker()` and `startStream()`:
 
 ## configure your stream
 
-You can configure a number of settings for your client.
+You can configure a number of settings for the tweets you display.
 
-To set default parameters for your map on load:
+To set default parameters for your map when the map loads:
 
 ```
 var controller = {};
@@ -18,7 +18,7 @@ var mapConfigs = {
    latitude: 51.5044477,
    longitude: -0.130291,
    radius: 5000,
-   sentiment: 'sentiment'
+   sentiment: 'imdb' // can be 'imdb' or 'dictionary'
 };
 
 function pageControlsInit () {
@@ -49,19 +49,21 @@ var markerConfigs = {
 ```
 
 
-## addMarker
+## addMarker()
 
-The addMarker adds a marker to a Google Map on your page. These functions need to be added within the `pageControlsInit()`. To use this function, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add a sentiment value. It should look something like this:
+The `addMarker()` function adds a single marker to a Google Map on your page. This function needs to be added within the `pageControlsInit()` function. To use `addMarker()`, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add either "imdb" or "dictionary". It should look something like this:
 
 ```
-controller.addMarker(latitude,longitude,text,sentiment)
+controller.addMarker(latitude,longitude,text,sentiment);
 
-controller.addMarker(48.8580119,2.34294, "Hello")
+controller.addMarker(48.8580119,2.34294,'Hello'); // without sentiment analysis
+
+controller.addMarker(48.8580119,2.34294,'Hello','dictionary'); // with sentiment analysis
 ```
 
-## startStream
+## startStream()
 
-Starting the stream will open a twitter stream to your browser. If you don't pass any arguments, the stream will use the default settings you have already set up for your map. Otherwise, you can pass a new lattitude and longitude, radius and sentiment.
+Starting the stream will open a twitter stream to your browser and will display many tweets on your map using the parameters you provide. This function needs to be added within the `pageControlsInit()` function. If you don't pass any arguments, the stream will use the default settings you have already set up for your map. Otherwise, you can pass a new latitude and longitude, radius and sentiment.
 
 To start the stream using defaults:
 
@@ -73,9 +75,9 @@ To start the stream using new settings:
 
 ```
 startStream({
-  lattitude: 48.8580119, //e.g.
+  latitude: 48.8580119,
   longitude: 2.34294,
-  radius: 500, //== 500 km
-  sentiment: 'sentiment' //acceptible arguments are 'sentiment' and 'imdb'
+  radius: 500, // in km
+  sentiment: 'imdb' //acceptible arguments are 'dictionary' and 'imdb'
 });
 ```
