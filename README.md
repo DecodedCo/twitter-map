@@ -18,11 +18,11 @@ var mapConfigs = {
    latitude: 51.5044477,
    longitude: -0.130291,
    radius: 5000,
-   sentiment: 'imdb' // can be 'imdb' or 'dictionary'
+   sentiment: 'imdb' // can be 'dictionary' or 'imdb'
 };
 
 function pageControlsInit () {
-  // This is where the functions go.
+  // This is where the addMarker() and/or startStream() functions go.
 };
 ```
 
@@ -49,9 +49,9 @@ var markerConfigs = {
 ```
 
 
-## addMarker()
+## addMarker
 
-The `addMarker()` function adds a single marker to a Google Map on your page. This function needs to be added within the `pageControlsInit()` function. To use `addMarker()`, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add either "imdb" or "dictionary". It should look something like this:
+The `addMarker()` function adds a single marker to a Google Map on your page. This function needs to be added within the `pageControlsInit()` function. To use `addMarker()`, supply a latitude, longitude and some text. If you want sentiment analysis to be performed on the text then add either 'dictionary' or 'imdb'. It should look something like this:
 
 ```
 controller.addMarker(latitude,longitude,text,sentiment);
@@ -61,7 +61,7 @@ controller.addMarker(48.8580119,2.34294,'Hello'); // without sentiment analysis
 controller.addMarker(48.8580119,2.34294,'Hello','dictionary'); // with sentiment analysis
 ```
 
-## startStream()
+## startStream
 
 Starting the stream will open a twitter stream to your browser and will display many tweets on your map using the parameters you provide. This function needs to be added within the `pageControlsInit()` function. If you don't pass any arguments, the stream will use the default settings you have already set up for your map. Otherwise, you can pass a new latitude and longitude, radius and sentiment.
 
@@ -78,6 +78,6 @@ startStream({
   latitude: 48.8580119,
   longitude: 2.34294,
   radius: 500, // in km
-  sentiment: 'imdb' //acceptible arguments are 'dictionary' and 'imdb'
+  sentiment: 'imdb' // can be 'dictionary' or 'imdb'
 });
 ```
