@@ -5,7 +5,7 @@ A library for creating a map of live tweets from the Twitter API.
 
 This library will allow you to add tweets onto a Google Map, and to perform live sentiment analysis on each tweet that comes in. There are two functions that come with the library, `addMarker()` and `startStream()`:
 
-## configure your stream
+## Configure Your Stream
 
 You can configure a number of settings for the tweets you display.
 
