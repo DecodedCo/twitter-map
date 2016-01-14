@@ -52,7 +52,7 @@ function pageControlsInit () {
 
 ## Editing the styling of the markers
 
-We can personalise the colours of the bubbles as follows. Above var mapConfigs, paste:
+We can personalise the colours of the bubbles as follows. Above `var mapConfigs`, paste:
 
 ```
 var markerConfigs = {
