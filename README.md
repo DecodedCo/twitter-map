@@ -5,6 +5,10 @@ A library for creating a map of tweets, live, from the Twitter API.
 
 This library will allow you to add tweets onto a Google Map, and to perform live sentiment analysis on each tweet that comes in. There are two functions that come with the library:
 
+## Google Maps API - Simple Map
+
+Use the Google Maps API to embed a map in your webpage. Google requires an API key for the map to work. 
+Change the latitude, longitude and zoom level of your map.
 
 ## addMarker
 
