@@ -17,9 +17,9 @@ var controller = window.controller || null;
 
 document.addEventListener('DOMContentLoaded', function () {
   var sources = [
-    'https://labs.decoded.com/data/twitter/js/TweetModel.js',
-    'https://labs.decoded.com/data/twitter/js/MapModel.js',
-    'https://labs.decoded.com/data/twitter/js/TweetMapController.js'
+    'https://internal.decoded.com/data/twitter/js/TweetModel.js',
+    'https://internal.decoded.com/data/twitter/js/MapModel.js',
+    'https://internal.decoded.com/data/twitter/js/TweetMapController.js'
   ];
   var postLoad = function () {
     var mapConfigs = window.mapConfigs || {};
