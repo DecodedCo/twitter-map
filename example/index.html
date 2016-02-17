@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Base HTML structure copied from Google Maps API: Simple Map -->
+    <title>Decoded Twitter Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      
+      //--> Change these values to the latitude, longitude, and radius of your area of interest, then choose the method of sentiment analysis to use <--
+      var lat = 40.748213;
+      var lon = -73.983995;
+      var radius = 500; // in kilometers
+      var method = 'imdb'; // 'imdb' or 'dictionary'
+      
+      // Code from tweet-map.js below
+        var controller = {};
+        
+      	// Settings for marker colors.
+        var markerConfigs = {
+          positive: {
+            color: 'rgb(43, 24, 92)',
+            strength: 0.5,
+            size: 20
+          },
+          neutral: {
+            color: 'rgb(255, 255, 255)',
+            strength: 0.8,
+            size: 20
+          },
+          negative: {
+            color: 'rgb(0, 0, 0)',
+            strength: 0.8,
+            size: 20
+          }
+        }
+				
+        // Settings for twitter.
+      	var mapConfigs = {
+           latitude: lat,
+           longitude: lon,
+           radius: radius
+        }; 
+      
+      	// Function to access access the twitter api
+        function pageControlsInit () {
+          controller.startStream({
+            latitude: lat,
+    				longitude: lon,
+            sentiment: method 
+          });
+        }
+      // Code from tweet-map.js above 
+      
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lat, lng: lon},
+          zoom: 8,
+          styles:
+          // Styling from snazzymaps.com below
+          	[{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+          // Styling from snazzymaps.com above
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCorisFcqtwJDwk5vw-Xuj1tWVYxj_jk&callback=initMap"
+    async defer></script>
+    
+    <!-- link to tweet-map.js library -->
+    <script src="https://assets.decoded.com/data/twitter-map.js"></script>
+  </body>
+</html>
