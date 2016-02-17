@@ -17,14 +17,14 @@ var controller = window.controller || null;
 
 document.addEventListener('DOMContentLoaded', function () {
   var sources = [
-    'https://labs.decoded.com/data/twitter/js/TweetModel.js',
-    'https://labs.decoded.com/data/twitter/js/MapModel.js',
-    'https://labs.decoded.com/data/twitter/js/TweetMapController.js'
+    'https://internal.decoded.com/data/twitter/js/TweetModel.js',
+    'https://internal.decoded.com/data/twitter/js/MapModel.js',
+    'https://internal.decoded.com/data/twitter/js/TweetMapController.js'
   ];
   var postLoad = function () {
     var mapConfigs = window.mapConfigs || {};
     mapConfigs.mainMarker = false;
-    mapConfigs.url = 'wss://labs.decoded.com/data/twitter/stream/';
+    mapConfigs.url = 'wss://internal.decoded.com/data/twitter/stream/';
     mapConfigs.map = window.map;
     $('body').bind('controllerLoaded', window.pageControlsInit);
     controller = new TweetMapController(mapConfigs);
